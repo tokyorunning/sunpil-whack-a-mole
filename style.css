@@ -1,11 +1,14 @@
 html {
   box-sizing: border-box;
   font-size: 10px;
-  background: #8e44ad; /* Fun purple background */
+  background: #8e44ad;
+  /* Fun purple background */
   background: radial-gradient(circle, #9b59b6 0%, #8e44ad 100%);
 }
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: inherit;
 }
 
@@ -29,11 +32,12 @@ h1 {
 }
 
 .score {
-  background: rgba(255,255,255,0.2);
+  background: rgba(255, 255, 255, 0.2);
   padding: 0 3rem;
   line-height: 1;
   border-radius: 1rem;
-  color: #f1c40f; /* Gold color for score */
+  color: #f1c40f;
+  /* Gold color for score */
 }
 
 button {
@@ -67,7 +71,9 @@ button:active {
   flex: 1 0 33.33%;
   overflow: hidden;
   position: relative;
-  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewport="0 0 100 100" style="fill:black;font-size:24px;"><text y="50%">🔨</text></svg>') 16 0, auto; /* Hammer cursor */
+  /* Custom SVG Toy Hammer Cursor (80x80) */
+  /* Red head, yellow handle, black outline */
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 100 100"><g transform="rotate(-45, 50, 50)"><rect x="30" y="60" width="40" height="10" fill="%23f1c40f" stroke="black" stroke-width="2"/><rect x="45" y="40" width="10" height="50" fill="%23f1c40f" stroke="black" stroke-width="2"/><rect x="20" y="20" width="60" height="40" rx="5" fill="%23e74c3c" stroke="black" stroke-width="2"/><circle cx="50" cy="40" r="5" fill="%23c0392b"/></g></svg>') 40 40, auto;
 }
 
 .hole:after {
@@ -83,37 +89,100 @@ button:active {
 }
 
 .mole {
-  background: #f1c40f; /* Fallback color */
-  border-radius: 50% 50% 0 0; /* Rounded top */
+  background: #f1c40f;
+  /* Fallback color */
+  border-radius: 50% 50% 0 0;
+  /* Rounded top */
   position: absolute;
   top: 100%;
   width: 60%;
-  height: 80%; /* Adjust height */
-  left: 20%; /* Center horizontally */
+  height: 80%;
+  /* Adjust height */
+  left: 20%;
+  /* Center horizontally */
   transition: all 0.4s;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 5rem; /* Size of the emoji */
-  z-index: 1; /* Behind the dirt */
+  font-size: 5rem;
+  /* Size of the emoji */
+  z-index: 1;
+  /* Behind the dirt */
 }
 
 /* Using pseudo-element for the emoji content */
 .mole::before {
-  content: '😈'; /* Sunpil Emoji */
+  content: '😈';
+  /* Sunpil Emoji */
   display: block;
-  transform: translateY(10px); /* Adjust emoji position */
+  transform: translateY(10px);
+  /* Adjust emoji position */
 }
 
 .hole.up .mole {
   top: 0;
 }
 
-/* Optional: Add a 'bonk' visual effect */
+/* Bonked state */
 .hole.up .mole.bonked {
-    transform: scale(0.9);
-    filter: grayscale(100%);
+  transform: scale(0.9);
+  filter: grayscale(0%);
+  /* Keep color */
 }
+
 .hole.up .mole.bonked::before {
-    content: '😵';
+  content: '😭';
+  /* Crying Face */
+}
+
+/* Screen Shake Animation */
+@keyframes shake {
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+
+  10% {
+    transform: translate(-1px, -2px) rotate(-1deg);
+  }
+
+  20% {
+    transform: translate(-3px, 0px) rotate(1deg);
+  }
+
+  30% {
+    transform: translate(3px, 2px) rotate(0deg);
+  }
+
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+
+  50% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
+
+  60% {
+    transform: translate(-3px, 1px) rotate(0deg);
+  }
+
+  70% {
+    transform: translate(3px, 1px) rotate(-1deg);
+  }
+
+  80% {
+    transform: translate(-1px, -1px) rotate(1deg);
+  }
+
+  90% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
+
+  100% {
+    transform: translate(1px, -2px) rotate(-1deg);
+  }
+}
+
+.shaking {
+  animation: shake 0.5s;
+  animation-iteration-count: 1;
 }
