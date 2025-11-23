@@ -1,0 +1,119 @@
+html {
+  box-sizing: border-box;
+  font-size: 10px;
+  background: #8e44ad; /* Fun purple background */
+  background: radial-gradient(circle, #9b59b6 0%, #8e44ad 100%);
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Press Start 2P', cursive;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+h1 {
+  text-align: center;
+  font-size: 4rem;
+  line-height: 1;
+  margin-bottom: 0;
+  color: #fff;
+  text-shadow: 2px 2px 0px #000;
+}
+
+.score {
+  background: rgba(255,255,255,0.2);
+  padding: 0 3rem;
+  line-height: 1;
+  border-radius: 1rem;
+  color: #f1c40f; /* Gold color for score */
+}
+
+button {
+  margin-top: 2rem;
+  padding: 1rem 2rem;
+  font-family: inherit;
+  font-size: 2rem;
+  background: #f1c40f;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #c0392b;
+  transition: all 0.1s;
+}
+
+button:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 #c0392b;
+}
+
+.game {
+  width: 600px;
+  height: 400px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  margin-top: 5rem;
+}
+
+.hole {
+  flex: 1 0 33.33%;
+  overflow: hidden;
+  position: relative;
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewport="0 0 100 100" style="fill:black;font-size:24px;"><text y="50%">🔨</text></svg>') 16 0, auto; /* Hammer cursor */
+}
+
+.hole:after {
+  display: block;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 50"><ellipse cx="50" cy="25" rx="40" ry="15" fill="%233e2723" /></svg>') bottom center no-repeat;
+  background-size: contain;
+  content: '';
+  width: 100%;
+  height: 70px;
+  position: absolute;
+  z-index: 2;
+  bottom: -30px;
+}
+
+.mole {
+  background: #f1c40f; /* Fallback color */
+  border-radius: 50% 50% 0 0; /* Rounded top */
+  position: absolute;
+  top: 100%;
+  width: 60%;
+  height: 80%; /* Adjust height */
+  left: 20%; /* Center horizontally */
+  transition: all 0.4s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 5rem; /* Size of the emoji */
+  z-index: 1; /* Behind the dirt */
+}
+
+/* Using pseudo-element for the emoji content */
+.mole::before {
+  content: '😈'; /* Sunpil Emoji */
+  display: block;
+  transform: translateY(10px); /* Adjust emoji position */
+}
+
+.hole.up .mole {
+  top: 0;
+}
+
+/* Optional: Add a 'bonk' visual effect */
+.hole.up .mole.bonked {
+    transform: scale(0.9);
+    filter: grayscale(100%);
+}
+.hole.up .mole.bonked::before {
+    content: '😵';
+}
